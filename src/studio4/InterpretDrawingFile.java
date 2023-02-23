@@ -18,7 +18,54 @@ public class InterpretDrawingFile {
 		JFileChooser chooser = new JFileChooser("resources");
 		chooser.showOpenDialog(null);
 		File f = new File(chooser.getSelectedFile().getPath());
-		Scanner in = new Scanner(f); //making Scanner with a File
-		
+		Scanner in = new Scanner(f); // making Scanner with a File
+
+		String shapeType = in.next();
+		int redComponent = in.nextInt();
+		int greenComponent = in.nextInt();
+		int blueComponent = in.nextInt();
+		boolean isFilled = in.nextBoolean();
+		StdDraw.setPenColor(redComponent, greenComponent, blueComponent);
+		// while(in.hasNextDouble()) {
+		if (shapeType.equals("rectangle")) {
+			double x = in.nextDouble();
+			double y = in.nextDouble();
+			double halfWidth = in.nextDouble();
+			double halfHeigh = in.nextDouble();
+			if (isFilled) {
+				StdDraw.filledRectangle(x, y, halfWidth, halfHeigh);
+
+			} else {
+				StdDraw.rectangle(x, y, halfWidth, halfHeigh);
+			}
+			// }
+		} else if (shapeType.equals("triangle")) {
+			double x1 = in.nextDouble();
+			double y1 = in.nextDouble();
+			double x2 = in.nextDouble();
+			double y2 = in.nextDouble();
+			double x3 = in.nextDouble();
+			double y3 = in.nextDouble();
+
+			double[] x = { x1, x2, x3 };
+			double[] y = { y1, y2, y3 };
+			if (isFilled) {
+				StdDraw.filledPolygon(x, y);
+
+			} else {
+				StdDraw.polygon(x, y);
+			}
+		}else if(shapeType.equals("ellipse")) {
+			double x = in.nextDouble();
+			double y = in.nextDouble();
+			double halfWidth = in.nextDouble();
+			double halfHeigh = in.nextDouble();
+			if (isFilled) {
+				StdDraw.filledEllipse(x, y, halfWidth, halfHeigh);
+
+			} else {
+				StdDraw.ellipse(x, y, halfWidth, halfHeigh);
+			}	
+		}
 	}
 }
